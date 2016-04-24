@@ -32,6 +32,7 @@ import android.app.StatusBarManager;
 import android.content.Context;
 import android.content.res.Resources;
 import android.graphics.drawable.Drawable;
+import android.graphics.PorterDuff.Mode;
 import android.net.Uri;
 import android.os.UserHandle;
 import android.provider.Settings;
@@ -118,6 +119,8 @@ public class SmartBarView extends BaseNavigationBar {
     private boolean mHasLeftContext;
     private int mImeHintMode;
     private int mButtonAnimationStyle;
+    private static boolean mNavTintSwitch;
+    public static int mIcontint;
 
     public SmartBarView(Context context) {
         super(context);
@@ -200,6 +203,10 @@ public class SmartBarView extends BaseNavigationBar {
 
     public void setButtonDrawable(SmartButtonView button) {
         ButtonConfig config = button.getButtonConfig();
+        mNavTintSwitch = Settings.System.getInt(getContext().getContentResolver(),
+                Settings.System.NAVBAR_TINT_SWITCH, 0) == 1;
+	mIcontint = Settings.System.getInt(mContext.getContentResolver(),
+                Settings.System.NAVBAR_BUTTON_COLOR, 0xFFFFFFFF);
         Drawable d = null;
         if (config != null) {
             // a system navigation action icon is showing, get it locally
@@ -220,8 +227,22 @@ public class SmartBarView extends BaseNavigationBar {
                 button.setImageDrawable(null);
                 button.setImageDrawable(d);
             }
+            if (mNavTintSwitch) {
+            button.setColorFilter(mIcontint, Mode.SRC_IN);
+            } else {
+            button.setColorFilter(null);
+            }
         }
     }
+    
+    public static int updatetint() {
+    if (mNavTintSwitch) {
+	return mIcontint; 
+    } else {
+	mIcontint = -1 ;
+	return mIcontint; 
+	 }
+    } 
 
     @Override
     public void setNavigationIconHints(int hints) {

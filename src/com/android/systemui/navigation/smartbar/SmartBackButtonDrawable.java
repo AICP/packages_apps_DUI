@@ -19,6 +19,7 @@ package com.android.systemui.navigation.smartbar;
 import com.android.systemui.navigation.smartbar.SmartBackButtonDrawable;
 
 import android.animation.Animator;
+import android.content.res.Resources;
 import android.animation.ObjectAnimator;
 import android.annotation.NonNull;
 import android.app.ActivityManager;
@@ -33,6 +34,8 @@ public class SmartBackButtonDrawable extends Drawable {
     private final Drawable mWrappedDrawable;
     private float mRotation;
     private Animator mCurrentAnimator;
+    private int mIcontint = SmartBarView.updatetint();
+                
 
     private static final int ANIMATION_DURATION = 200;
     public static final Property<SmartBackButtonDrawable, Float> ROTATION
@@ -50,7 +53,7 @@ public class SmartBackButtonDrawable extends Drawable {
 
     public SmartBackButtonDrawable(Drawable wrappedDrawable) {
         mWrappedDrawable = wrappedDrawable;
-    }
+    }   
 
     @Override
     public void draw(Canvas canvas) {
@@ -61,7 +64,11 @@ public class SmartBackButtonDrawable extends Drawable {
         canvas.translate(boundsCenterX, boundsCenterY);
         canvas.rotate(mRotation);
         canvas.translate(- boundsCenterX, - boundsCenterY);
-
+        if(mIcontint != -1) {
+	mWrappedDrawable.setTint(mIcontint);
+        } else {
+        mWrappedDrawable.setTintList(null);
+        }
         mWrappedDrawable.draw(canvas);
     }
 
