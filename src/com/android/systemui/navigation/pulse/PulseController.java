@@ -176,6 +176,9 @@ public class PulseController {
             resolver.registerContentObserver(
                     Settings.Secure.getUriFor(Settings.Secure.FLING_PULSE_LAVALAMP_SPEED), false, this,
                     UserHandle.USER_ALL);
+            resolver.registerContentObserver(Settings.System.getUriFor(
+                    Settings.System.PULSE_CUSTOM_DIMEN),
+                    false, this, UserHandle.USER_ALL);
         }
 
         @Override
@@ -183,6 +186,8 @@ public class PulseController {
             if (uri.equals(Settings.Secure.getUriFor(Settings.Secure.FLING_PULSE_ENABLED))) {
                 updateEnabled();
                 doLinkage();
+            } else if (uri.equals(Settings.System.getUriFor(Settings.System.PULSE_CUSTOM_DIMEN))) {     
+            resetvisualizer(); 
             } else {
                 update();
             }
@@ -392,4 +397,8 @@ public class PulseController {
             mVisualizer.onDraw(canvas);
         }
     }
+    
+   public void resetvisualizer() {
+	setPulseObserver(mPulseObserver);
+   }
 }
