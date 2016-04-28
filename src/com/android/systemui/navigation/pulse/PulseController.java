@@ -402,8 +402,12 @@ public class PulseController {
             mVisualizer.onDraw(canvas);
         }
     }
-    
+
    public void resetvisualizer() {
 	setPulseObserver(mPulseObserver);
+	setVisualizerLocked(true);
+	mVisualizer.setDrawingEnabled(true);
+        mVisualizer.link(0);
+        mLinked = true;
    }
 }
