@@ -121,6 +121,8 @@ public class SmartBarView extends BaseNavigationBar {
     private int mButtonAnimationStyle;
     private static boolean mNavTintSwitch;
     public static int mIcontint;
+    public static int mButtonsAlpha;
+    private int mButtonsPulseAlpha;
 
     public SmartBarView(Context context) {
         super(context);
@@ -207,6 +209,8 @@ public class SmartBarView extends BaseNavigationBar {
                 Settings.System.NAVBAR_TINT_SWITCH, 0) == 1;
         mIcontint = Settings.System.getInt(mContext.getContentResolver(),
                 Settings.System.NAVBAR_BUTTON_COLOR, 0xFFFFFFFF);
+        mButtonsAlpha = Settings.Secure.getInt(mContext.getContentResolver(),
+                Settings.Secure.NAVBAR_BUTTONS_ALPHA, 255);
         Drawable d = null;
         if (config != null) {
             // a system navigation action icon is showing, get it locally
@@ -225,12 +229,15 @@ public class SmartBarView extends BaseNavigationBar {
                 backDrawable.setImeVisible(backAlt);
             } else {
                 button.setImageDrawable(null);
+                if (!isBarPulseFaded()) {
+                    button.setAlpha(mButtonsAlpha);
+                }
                 button.setImageDrawable(d);
             }
             if (mNavTintSwitch) {
-            button.setColorFilter(mIcontint, Mode.SRC_IN);
+                button.setColorFilter(mIcontint, Mode.SRC_IN);
             } else {
-            button.setColorFilter(null);
+                button.setColorFilter(null);
             }
         }
     }
@@ -242,6 +249,10 @@ public class SmartBarView extends BaseNavigationBar {
             mIcontint = -1 ;
             return mIcontint;
         }
+    }
+
+    public static int updateAlpha() {
+        return mButtonsAlpha;
     }
 
     @Override
