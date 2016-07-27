@@ -35,6 +35,7 @@ public class SmartBackButtonDrawable extends Drawable {
     private float mRotation;
     private Animator mCurrentAnimator;
     private int mIcontint = SmartBarView.updatetint();
+    private int mButtonsAlpha = SmartBarView.updateAlpha();
 
     private static final int ANIMATION_DURATION = 200;
     public static final Property<SmartBackButtonDrawable, Float> ROTATION
@@ -68,6 +69,7 @@ public class SmartBackButtonDrawable extends Drawable {
         } else {
             mWrappedDrawable.setTintList(null);
         }
+        mWrappedDrawable.setAlpha(mButtonsAlpha);
         mWrappedDrawable.draw(canvas);
     }
 
