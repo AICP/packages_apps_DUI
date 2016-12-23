@@ -54,7 +54,6 @@
   <string name="label_action_one_handed_mode_right">Ein-Hand-Modus (rechte Seite)</string>
   <string name="label_action_media_left">Nächster Titel</string>
   <string name="label_action_media_right">Vorheriger Titel</string>
-
   <!-- Smartbar -->
   <string name="label_smartbar_actions">Aktionen</string>
   <string name="label_smartbar_icon">Symbol</string>
@@ -73,8 +72,6 @@
   <string name="smartbar_editor_toast_stopping">Navigationseditor gestoppt</string>
   <string name="smartbar_editor_toast_unavailable">Navigationseditor nicht verfügbar</string>
   <string name="edit_mode">Bearbeitungsmodus</string>
-
   <!-- App killed message -->
   <string name="app_killed_message">%s beendet</string>
-
 </resources>
