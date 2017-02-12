@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "da9df570_0e06da20",
+        "filename": "res/layout/opa_smartbutton.xml",
+        "patchSetId": 1
+      },
+      "lineNbr": 27,
+      "author": {
+        "id": 683
+      },
+      "writtenOn": "2017-02-12T16:39:56Z",
+      "side": 1,
+      "message": "typo android:layout_width\u003d\"@dimen/match_parent\"",
+      "revId": "d5a497682a46564f323fbb1378eb1d83a65bc5c6",
+      "serverId": "9f904cbb-a964-4fab-a7dc-5cfc4d5c238b",
+      "unresolved": false
+    }
+  ]
+}
