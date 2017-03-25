@@ -247,7 +247,7 @@ public class SmartBarView extends BaseNavigationBar {
             // a system navigation action icon is showing, get it locally
             if (!config.hasCustomIcon()
                     && config.isSystemAction()) {
-                    d = mResourceMap.getActionDrawable(config.getActionConfig(ActionConfig.PRIMARY).getAction());
+                d = mResourceMap.getActionDrawable(config.getActionConfig(ActionConfig.PRIMARY).getAction());
             } else {
                 // custom icon or intent icon, get from library
                 d = config.getCurrentIcon(getContext());
@@ -263,9 +263,12 @@ public class SmartBarView extends BaseNavigationBar {
                 button.setImageDrawable(d);
             }
             if (mNavTintSwitch) {
-            button.setColorFilter(mIcontint, Mode.SRC_IN);
+                button.setColorFilter(mIcontint, Mode.SRC_IN);
             } else {
-            button.setColorFilter(null);
+                button.setColorFilter(null);
+            }
+            if (!config.isSystemAction()) {
+                button.setColorFilter(null);
             }
         }
     }
