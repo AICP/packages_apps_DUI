@@ -33,6 +33,7 @@ import android.content.Context;
 import android.content.res.Resources;
 import android.graphics.drawable.Drawable;
 import android.graphics.PorterDuff.Mode;
+import android.media.AudioManager;
 import android.net.Uri;
 import android.os.UserHandle;
 import android.provider.Settings;
@@ -141,6 +142,8 @@ public class SmartBarView extends BaseNavigationBar {
     public static int mIcontint;
     private static boolean mNavTintCustomIconSwitch;
 
+    private AudioManager mAudioManager;
+
     private GestureDetector mNavDoubleTapToSleep;
     private SlideTouchEvent mSlideTouchEvent;
 
@@ -166,17 +169,14 @@ public class SmartBarView extends BaseNavigationBar {
             }
         });
 
+        mAudioManager = (AudioManager) context.getSystemService(Context.AUDIO_SERVICE);
+
         mMediaMonitor = new MediaMonitor(context) {
             @Override
             public void onPlayStateChanged(boolean playing) {
                 if (mImeHintMode == 3) {
+                    //handle media/ime arrows visibility and smartbutton action type
                     setNavigationIconHints(mNavigationIconHints, true);
-                    final boolean backAlt = (mNavigationIconHints & StatusBarManager.NAVIGATION_HINT_BACK_ALT) != 0;
-                    if (isAnythingPlaying() && !backAlt) {
-                        SmartButtonView.arrowsMediaAction = true;
-                    } else {
-                        SmartButtonView.arrowsMediaAction = false;
-                    }
                 }
             }
         };
@@ -270,9 +270,10 @@ public class SmartBarView extends BaseNavigationBar {
             // a system navigation action icon is showing, get it locally
             String action = config.getActionConfig(ActionConfig.PRIMARY).getAction();
             final boolean backAlt = (mNavigationIconHints & StatusBarManager.NAVIGATION_HINT_BACK_ALT) != 0;
-            if (!backAlt && mMediaMonitor.isAnythingPlaying() &&
+            if (!backAlt && mMediaMonitor.isAnythingPlaying() && mAudioManager.isMusicActive() &&
                     ("task_ime_navigation_left".equals(action) || "task_ime_navigation_right".equals(action))) {
-                d = getContext().getResources().getDrawable(action == "task_ime_navigation_left" ? R.drawable.ic_skip_previous : R.drawable.ic_skip_next, null);
+                d = getContext().getResources().getDrawable(action == "task_ime_navigation_left" ?
+                        R.drawable.ic_skip_previous : R.drawable.ic_skip_next, null);
             } else
             if (!config.hasCustomIcon()
                     && config.isSystemAction()) {
@@ -385,7 +386,8 @@ public class SmartBarView extends BaseNavigationBar {
             case IME_AND_MEDIA_HINT_MODE_ARROWS:
                 getImeSwitchButton().setVisibility(View.INVISIBLE);
                 updateCurrentIcons();
-                setImeArrowsVisibility(mCurrentView, (backAlt || mMediaMonitor.isAnythingPlaying()) ? View.VISIBLE : View.INVISIBLE);
+                setImeArrowsVisibility(mCurrentView, (backAlt || (mMediaMonitor.isAnythingPlaying() &&
+                        mAudioManager.isMusicActive())) ? View.VISIBLE : View.INVISIBLE);
                 SmartButtonView.arrowsMediaAction = !backAlt;
                 break;
             default: //IME_HINT_MODE_ARROWS
