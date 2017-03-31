@@ -176,9 +176,9 @@ public class SmartBarView extends BaseNavigationBar {
         mMediaMonitor = new MediaMonitor(context) {
             @Override
             public void onPlayStateChanged(boolean playing) {
-                if (mImeHintMode == 3) {
+                if (mImeHintMode == 3 && mEditor != null && mEditor.getMode() == BaseEditor.MODE_OFF) {
                     //handle media/ime arrows visibility and smartbutton action type
-                    setNavigationIconHints(mNavigationIconHints, true);
+                    setArrowsMode();
                 }
             }
         };
@@ -386,11 +386,7 @@ public class SmartBarView extends BaseNavigationBar {
                 setImeArrowsVisibility(mCurrentView, View.INVISIBLE);
                 break;
             case IME_AND_MEDIA_HINT_MODE_ARROWS:
-                getImeSwitchButton().setVisibility(View.INVISIBLE);
-                updateCurrentIcons();
-                setImeArrowsVisibility(mCurrentView, (backAlt || (mMediaMonitor.isAnythingPlaying() &&
-                        mAudioManager.isMusicActive())) ? View.VISIBLE : View.INVISIBLE);
-                SmartButtonView.arrowsMediaAction = !backAlt;
+                setArrowsMode();
                 break;
             default: //IME_HINT_MODE_ARROWS
                 getImeSwitchButton().setVisibility(View.INVISIBLE);
@@ -402,6 +398,15 @@ public class SmartBarView extends BaseNavigationBar {
         // Update menu button in case the IME state has changed.
         setMenuVisibility(mShowMenu, true);
         setDisabledFlags(mDisabledFlags, true);
+    }
+
+    private void setArrowsMode() {
+        final boolean backAlt = (mNavigationIconHints & StatusBarManager.NAVIGATION_HINT_BACK_ALT) != 0;
+        getImeSwitchButton().setVisibility(View.INVISIBLE);
+        updateCurrentIcons();
+        setImeArrowsVisibility(mCurrentView, (backAlt || (mMediaMonitor.isAnythingPlaying()
+                && mAudioManager.isMusicActive())) ? View.VISIBLE : View.INVISIBLE);
+        SmartButtonView.arrowsMediaAction = !backAlt;
     }
 
     @Override
