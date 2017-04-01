@@ -28,16 +28,16 @@ public class OpaLayout extends FrameLayout {
     private static final int ANIMATION_STATE_OTHER = 3;
 
     private static final int MIN_DIAMOND_DURATION = 100;
-    private static final int COLLAPSE_ANIMATION_DURATION_RY = 83;
-    private static final int COLLAPSE_ANIMATION_DURATION_BG = 100;
-    private static final int LINE_ANIMATION_DURATION_Y = 275;
-    private static final int LINE_ANIMATION_DURATION_X = 133;
-    private static final int RETRACT_ANIMATION_DURATION = 300;
-    private static final int DIAMOND_ANIMATION_DURATION = 200;
-    private static final int HALO_ANIMATION_DURATION = 100;
+    public static int COLLAPSE_ANIMATION_DURATION_RY;
+    public static int COLLAPSE_ANIMATION_DURATION_BG;
+    public static int LINE_ANIMATION_DURATION_Y;
+    public static int LINE_ANIMATION_DURATION_X;
+    public static int RETRACT_ANIMATION_DURATION;
+    public static int DIAMOND_ANIMATION_DURATION;
+    public static int HALO_ANIMATION_DURATION;
 
-    private static final int DOTS_RESIZE_DURATION = 200;
-    private static final int HOME_RESIZE_DURATION = 83;
+    public static int DOTS_RESIZE_DURATION;
+    public static int HOME_RESIZE_DURATION;
 
     private static final int HOME_REAPPEAR_ANIMATION_OFFSET = 33;
     private static final int HOME_REAPPEAR_DURATION = 150;
