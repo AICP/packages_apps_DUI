@@ -120,7 +120,8 @@ public abstract class MediaMonitor implements MediaSessionManager.OnActiveSessio
 
                 @Override
                 public void onPlaybackStateChanged(@NonNull PlaybackState state) {
-                    mIsPlaying = state.getState() == PlaybackState.STATE_PLAYING;
+                    mIsPlaying = (state.getState() == PlaybackState.STATE_PLAYING
+                            || state.getState() == PlaybackState.STATE_BUFFERING);
                     checkIfPlaying();
                 }
             };
