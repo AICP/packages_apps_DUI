@@ -172,13 +172,13 @@ public abstract class MediaMonitor implements MediaSessionManager.OnActiveSessio
         return false;
     }
 
+
     public boolean isAnythingPlayingColdCheck() {
         List<MediaController> activeSessions = mMediaSessionManager.getActiveSessions(null);
         for (MediaController activeSession : activeSessions) {
             PlaybackState playbackState = activeSession.getPlaybackState();
-            if (playbackState != null && playbackState.getState()
-                    == PlaybackState.STATE_PLAYING
-                    || playbackState.getState() == PlaybackState.STATE_BUFFERING) {
+            if (playbackState != null && (playbackState.getState()
+                    == PlaybackState.STATE_PLAYING || playbackState.getState() == PlaybackState.STATE_BUFFERING)) {
                 return true;
             }
         }
