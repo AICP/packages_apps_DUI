@@ -284,8 +284,8 @@ public class NavigationController implements PackageChangedListener {
                     UserHandle.USER_ALL);
             resolver.registerContentObserver(Settings.Secure.getUriFor(
                     Settings.Secure.NAVIGATION_BAR_VISIBLE), false, this, UserHandle.USER_ALL);
-//            resolver.registerContentObserver(CMSettings.System.getUriFor(
-//                    CMSettings.System.NAVBAR_LEFT_IN_LANDSCAPE), false, this, UserHandle.USER_ALL);
+            resolver.registerContentObserver(CMSettings.System.getUriFor(
+                    CMSettings.System.NAVBAR_LEFT_IN_LANDSCAPE), false, this, UserHandle.USER_ALL);
         }
 
         @Override
@@ -294,13 +294,14 @@ public class NavigationController implements PackageChangedListener {
 
         public void onChange(boolean selfChange, Uri uri) {
             final ContentResolver resolver = mContext.getContentResolver();
+            final boolean isBarShowingNow = mBar.getNavigationBarView() != null; // sanity checks
 
-//            if (uri.equals(CMSettings.System.getUriFor(Settings.System.NAVBAR_LEFT_IN_LANDSCAPE))
-//                    && isBarShowingNow) {
-//                boolean navLeftInLandscape = CMSettings.System.getIntForUser(resolver,
-//                        CMSettings.System.NAVBAR_LEFT_IN_LANDSCAPE, 0, UserHandle.USER_CURRENT) == 1;
-//                mBar.getNavigationBarView().setLeftInLandscape(navLeftInLandscape);
-            if (uri.equals(Settings.Secure
+            if (uri.equals(CMSettings.System.getUriFor(CMSettings.System.NAVBAR_LEFT_IN_LANDSCAPE))
+                    && isBarShowingNow) {
+                boolean navLeftInLandscape = CMSettings.System.getIntForUser(resolver,
+                        CMSettings.System.NAVBAR_LEFT_IN_LANDSCAPE, 0, UserHandle.USER_CURRENT) == 1;
+                mBar.getNavigationBarView().setLeftInLandscape(navLeftInLandscape);
+            } else if (uri.equals(Settings.Secure
                     .getUriFor(Settings.Secure.NAVIGATION_BAR_VISIBLE))) {
                 boolean showing = Settings.Secure.getInt(resolver,
                         Settings.Secure.NAVIGATION_BAR_VISIBLE,
