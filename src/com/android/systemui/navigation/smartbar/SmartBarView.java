@@ -115,6 +115,7 @@ public class SmartBarView extends BaseNavigationBar {
         sUris.add(Settings.Secure.getUriFor(Settings.Secure.ONE_HANDED_MODE_UI));
         sUris.add(Settings.Secure.getUriFor(Settings.Secure.PULSE_CUSTOM_BUTTONS_OPACITY));
         sUris.add(Settings.Secure.getUriFor(Settings.Secure.SMARTBAR_LONGPRESS_DELAY));
+        sUris.add(Settings.Secure.getUriFor(Settings.Secure.SMARTBAR_CUSTOM_ICON_SIZE));
         sUris.add(Settings.System.getUriFor(Settings.System.OPA_ANIM_DURATION_Y));
         sUris.add(Settings.System.getUriFor(Settings.System.OPA_ANIM_DURATION_X));
         sUris.add(Settings.System.getUriFor(Settings.System.COLLAPSE_ANIMATION_DURATION_BG));
@@ -150,6 +151,9 @@ public class SmartBarView extends BaseNavigationBar {
                 updatePulseNavButtonsOpacity();
             } else if (uri.equals(Settings.Secure.getUriFor(Settings.Secure.SMARTBAR_LONGPRESS_DELAY))) {
                 updateButtonLongpressDelay();
+            } else if (uri.equals(Settings.Secure.getUriFor(Settings.Secure.SMARTBAR_CUSTOM_ICON_SIZE))) {
+                updateCustomIconSize();
+                updateCurrentIcons();
             } else if (uri.equals(Settings.System.getUriFor(Settings.System.OPA_ANIM_DURATION_Y))) {
                 setYAnimationDuration();
             } else if (uri.equals(Settings.System.getUriFor(Settings.System.OPA_ANIM_DURATION_X))) {
@@ -186,6 +190,7 @@ public class SmartBarView extends BaseNavigationBar {
     private int mImeHintMode;
     private int mButtonAnimationStyle;
     private float mCustomAlpha;
+    private float mCustomIconScale;
     private static boolean mNavTintSwitch;
     public static int mIcontint;
     private static boolean mNavTintCustomIconSwitch;
@@ -292,6 +297,7 @@ public class SmartBarView extends BaseNavigationBar {
     @Override
     public void setResourceMap(NavbarOverlayResources resourceMap) {
         super.setResourceMap(resourceMap);
+        updateCustomIconSize();
         recreateLayouts();
         updateImeHintModeSettings();
         updateContextLayoutSettings();
@@ -355,23 +361,36 @@ public class SmartBarView extends BaseNavigationBar {
                 Settings.System.NAVBAR_BUTON_CUSTOM_ICON_SWITCH, 1) == 1;
         Drawable d = null;
         if (config != null) {
+            Context ctx = getContext();
+            boolean needsResize;
             // a system navigation action icon is showing, get it locally
             if (!config.hasCustomIcon()
                     && config.isSystemAction()) {
-                    d = mResourceMap.getActionDrawable(config.getActionConfig(ActionConfig.PRIMARY).getAction());
+                needsResize = false;
+                d = mResourceMap.getActionDrawable(config.getActionConfig(ActionConfig.PRIMARY).getAction());
             } else {
+                needsResize = true;
                 // custom icon or intent icon, get from library
-                d = config.getCurrentIcon(getContext());
+                d = config.getCurrentIcon(ctx);
             }
             if (TextUtils.equals(config.getTag(), Res.Softkey.BUTTON_BACK)) {
-                SmartBackButtonDrawable backDrawable = new SmartBackButtonDrawable(d);
+                SmartBackButtonDrawable backDrawable;
+                if (needsResize) {
+                    backDrawable = new SmartBackButtonDrawable(SmartBarHelper.resizeCustomButtonIcon(d, ctx, mCustomIconScale));
+                } else {
+                    backDrawable = new SmartBackButtonDrawable(d);
+                }
                 button.setImageDrawable(null);
                 button.setImageDrawable(backDrawable);
                 final boolean backAlt = (mNavigationIconHints & StatusBarManager.NAVIGATION_HINT_BACK_ALT) != 0;
                 backDrawable.setImeVisible(backAlt);
             } else {
                 button.setImageDrawable(null);
-                button.setImageDrawable(d);
+                if (needsResize) {
+                    button.setImageDrawable(SmartBarHelper.resizeCustomButtonIcon(d, ctx, mCustomIconScale));
+                } else {
+                    button.setImageDrawable(d);
+                }
             }
             if (mNavTintSwitch) {
                 button.setColorFilter(mIcontint, Mode.SRC_IN);
@@ -960,6 +979,12 @@ public class SmartBarView extends BaseNavigationBar {
                 SmartButtonView.setButtonLongpressDelay(systemLpDelay + 200);
                 break;
         }
+    }
+
+    private void updateCustomIconSize() {
+        int iconSize = Settings.Secure.getIntForUser(getContext().getContentResolver(),
+                Settings.Secure.SMARTBAR_CUSTOM_ICON_SIZE, 60, UserHandle.USER_CURRENT);
+        mCustomIconScale = 0.01f * iconSize;
     }
 
     public void  setYAnimationDuration() {
