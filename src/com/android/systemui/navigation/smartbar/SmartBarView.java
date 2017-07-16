@@ -355,23 +355,36 @@ public class SmartBarView extends BaseNavigationBar {
                 Settings.System.NAVBAR_BUTON_CUSTOM_ICON_SWITCH, 1) == 1;
         Drawable d = null;
         if (config != null) {
+            Context ctx = getContext();
+            boolean needsResize;
             // a system navigation action icon is showing, get it locally
             if (!config.hasCustomIcon()
                     && config.isSystemAction()) {
-                    d = mResourceMap.getActionDrawable(config.getActionConfig(ActionConfig.PRIMARY).getAction());
+                needsResize = false;
+                d = mResourceMap.getActionDrawable(config.getActionConfig(ActionConfig.PRIMARY).getAction());
             } else {
+                needsResize = true;
                 // custom icon or intent icon, get from library
-                d = config.getCurrentIcon(getContext());
+                d = config.getCurrentIcon(ctx);
             }
             if (TextUtils.equals(config.getTag(), Res.Softkey.BUTTON_BACK)) {
-                SmartBackButtonDrawable backDrawable = new SmartBackButtonDrawable(d);
+                SmartBackButtonDrawable backDrawable;
+                if (needsResize) {
+                    backDrawable = new SmartBackButtonDrawable(SmartBarHelper.resizeCustomButtonIcon(d, ctx));
+                } else {
+                    backDrawable = new SmartBackButtonDrawable(d);
+                }
                 button.setImageDrawable(null);
                 button.setImageDrawable(backDrawable);
                 final boolean backAlt = (mNavigationIconHints & StatusBarManager.NAVIGATION_HINT_BACK_ALT) != 0;
                 backDrawable.setImeVisible(backAlt);
             } else {
                 button.setImageDrawable(null);
-                button.setImageDrawable(d);
+                if (needsResize) {
+                    button.setImageDrawable(SmartBarHelper.resizeCustomButtonIcon(d, ctx));
+                } else {
+                    button.setImageDrawable(d);
+                }
             }
             if (mNavTintSwitch) {
                 button.setColorFilter(mIcontint, Mode.SRC_IN);
