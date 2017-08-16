@@ -61,6 +61,7 @@ import com.android.internal.utils.du.Config.ActionConfig;
 import com.android.internal.utils.du.Config.ButtonConfig;
 import com.android.systemui.navigation.BaseEditor;
 import com.android.systemui.navigation.BaseNavigationBar;
+import com.android.systemui.navigation.Editor;
 import com.android.systemui.navigation.OpaLayout;
 import com.android.systemui.navigation.Res;
 import com.android.systemui.navigation.NavigationController.NavbarOverlayResources;
@@ -292,6 +293,11 @@ public class SmartBarView extends BaseNavigationBar {
 
     float getButtonAlpha() {
         return mCustomAlpha;
+    }
+
+    @Override
+    public Editor getEditor() {
+        return mEditor;
     }
 
     @Override
@@ -659,9 +665,6 @@ public class SmartBarView extends BaseNavigationBar {
 
     @Override
     protected void onDispose() {
-        if (mEditor != null) {
-            mEditor.unregister();
-        }
     }
 
     @Override

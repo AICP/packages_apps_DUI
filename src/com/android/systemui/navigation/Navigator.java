@@ -69,4 +69,5 @@ public interface Navigator {
     public void setLayoutTransitionsEnabled(boolean enabled);
     public void setWakeAndUnlocking(boolean wakeAndUnlocking);
     public void dump(FileDescriptor fd, PrintWriter pw, String[] args);
+    public Editor getEditor();
 }

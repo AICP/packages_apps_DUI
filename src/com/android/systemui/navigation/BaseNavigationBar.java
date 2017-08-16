@@ -173,6 +173,8 @@ public abstract class BaseNavigationBar extends LinearLayout implements Navigato
     public void setNavigationIconHints(int hints, boolean force) {}
     public void onHandlePackageChanged(){}
 
+    public Editor getEditor() { return null; }
+
     public boolean isInEditMode() { return false; }
 
     public void onRecreateStatusbar() {}
