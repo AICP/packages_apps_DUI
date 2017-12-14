@@ -489,9 +489,9 @@ public abstract class BaseNavigationBar extends LinearLayout implements Navigato
         mRot90.setPadding(mRot90.getPaddingLeft(), 0, mRot90.getPaddingRight(),
                 mRot90.getPaddingBottom());
 
-        if (!BarTransitions.HIGH_END) {
+        /*if (!BarTransitions.HIGH_END) {
             setBackground(getContext().getDrawable(R.drawable.system_bar_background));
-        }
+        }*/
 
 //        addBatteryBarLayout(mRot0);
         mRot0.addView(rot0NavButton);
