@@ -17,7 +17,63 @@
  -->
 <resources xmlns:xliff="urn:oasis:names:tc:xliff:document:1.2">
   <!-- Bindable action labels -->
+  <string name="label_action_no_action">Nessuna azione</string>
+  <string name="label_action_settings_panel">Pannello impostazioni rapide</string>
+  <string name="label_action_notification_panel">Pannello delle notifiche</string>
+  <string name="label_action_screenshot">Screenshot</string>
+  <string name="label_action_region_screenshot">Screenshot parziale</string>
+  <string name="label_action_screenrecord">Registra schermo</string>
+  <string name="label_action_expanded_desktop">Desktop esteso</string>
+  <string name="label_action_screen_off">Spegni lo schermo</string>
+  <string name="label_action_force_close_app">Chiusura forzata app</string>
+  <string name="label_action_search_assistant">Assistente di ricerca</string>
+  <string name="label_action_google_now_on_tap">Assistente Google</string>
+  <string name="label_action_voice_search">Ricerca vocale</string>
+  <string name="label_action_in_app_search">Ricerca in applicazioni</string>
+  <string name="label_action_flashlight">Torcia</string>
+  <string name="label_action_bluetooth">Bluetooth</string>
+  <string name="label_action_wifi">WiFi</string>
+  <string name="label_action_hotspot">Hotspot</string>
+  <string name="label_action_last_app">Ultima applicazione</string>
+  <string name="label_action_overview">Recenti</string>
+  <string name="label_action_power_menu">Menù di alimentazione</string>
+  <string name="label_action_menu">Menù</string>
+  <string name="label_action_back">Indietro</string>
+  <string name="label_action_home">Home</string>
+  <string name="label_action_ime_switcher">Metodo inserimento</string>
+  <string name="label_action_stop_screenpinning">Interrompi blocco sullo schermo</string>
+  <string name="label_action_ime_down">Cursore d\'inserimento verso il basso</string>
+  <string name="label_action_ime_left">Cursore d\'inserimento verso sinistra</string>
+  <string name="label_action_ime_right">Cursore d\'inserimento verso destra</string>
+  <string name="label_action_ime_up">Cursore d\'inserimento verso l\'alto</string>
+  <string name="label_action_volume_panel">Pannello volume</string>
+  <string name="label_action_clear_notifications">Cancella le notifiche</string>
+  <string name="label_action_editing_smartbar">Modifica smartbar</string>
+  <string name="label_action_split_screen">Dividi schermo</string>
+  <string name="label_action_one_handed_mode_left">Modalità a una mano (lato sinistro)</string>
+  <string name="label_action_one_handed_mode_right">Modalità a una mano (lato destro)</string>
+  <string name="label_action_media_left">Brano precedente</string>
+  <string name="label_action_media_right">Brano successivo</string>
+  <string name="label_action_assistant_sound_search">Ricerca audio Google</string>
   <!-- Smartbar -->
+  <string name="label_smartbar_actions">Azioni</string>
+  <string name="label_smartbar_icon">Icona</string>
+  <string name="label_smartbar_add">Aggiungi</string>
+  <string name="label_smartbar_remove">Rimuovi</string>
+  <string name="label_smartbar_cancel">Annulla</string>
+  <string name="label_smartbar_finish">Termina</string>
+  <string name="label_smartbar_single_tap">Tocco singolo</string>
+  <string name="label_smartbar_double_tap">Doppio tocco</string>
+  <string name="label_smartbar_long_press">Pressione prolungata</string>
+  <string name="label_smartbar_icon_pack">Pacchetto icone</string>
+  <string name="label_smartbar_icon_gallery">Galleria</string>
+  <string name="label_smartbar_icon_color">Colore</string>
+  <string name="label_smartbar_icon_reset">Ripristina</string>
+  <string name="smartbar_editor_toast_starting">Avvio modifica barra di navigazione</string>
+  <string name="smartbar_editor_toast_stopping">Arresto modifica barra di navigazione</string>
+  <string name="smartbar_editor_toast_unavailable">Modifica della barra di navigazione non disponibile</string>
+  <string name="edit_mode">Modalità modifica</string>
   <!-- App killed message -->
+  <string name="app_killed_message">%s terminato</string>
   <!-- Pulse and media arrows blacklist -->
 </resources>

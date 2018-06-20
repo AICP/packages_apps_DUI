@@ -17,7 +17,63 @@
  -->
 <resources xmlns:xliff="urn:oasis:names:tc:xliff:document:1.2">
   <!-- Bindable action labels -->
+  <string name="label_action_no_action">Tidak ada tindakan</string>
+  <string name="label_action_settings_panel">Panel Setelan Cepat</string>
+  <string name="label_action_notification_panel">Panel pemberitahuan</string>
+  <string name="label_action_screenshot">Tangkapan layar</string>
+  <string name="label_action_region_screenshot">Tangkapan layar sebagian</string>
+  <string name="label_action_screenrecord">Rekam layar</string>
+  <string name="label_action_expanded_desktop">Desktop diperluas</string>
+  <string name="label_action_screen_off">Matikan layar</string>
+  <string name="label_action_force_close_app">Paksa tutup aplikasi</string>
+  <string name="label_action_search_assistant">Asisten pencarian</string>
+  <string name="label_action_google_now_on_tap">Asisten Google</string>
+  <string name="label_action_voice_search">Pencarian suara</string>
+  <string name="label_action_in_app_search">Pencarian di dalam aplikasi</string>
+  <string name="label_action_flashlight">Senter</string>
+  <string name="label_action_bluetooth">Bluetooth</string>
+  <string name="label_action_wifi">WiFi</string>
+  <string name="label_action_hotspot">Hotspot</string>
+  <string name="label_action_last_app">Aplikasi terakhir</string>
+  <string name="label_action_overview">Recent</string>
+  <string name="label_action_power_menu">Menu daya</string>
+  <string name="label_action_menu">Menu</string>
+  <string name="label_action_back">Kembali</string>
+  <string name="label_action_home">Beranda</string>
+  <string name="label_action_ime_switcher">Pengganti IME</string>
+  <string name="label_action_stop_screenpinning">Berhenti menyemat layar</string>
+  <string name="label_action_ime_down">Metode masukan kursor ke bawah</string>
+  <string name="label_action_ime_left">Metode masukan kursor ke kiri</string>
+  <string name="label_action_ime_right">Metode masukan kursor ke kanan</string>
+  <string name="label_action_ime_up">Metode masukan kursor ke atas</string>
+  <string name="label_action_volume_panel">Panel volume</string>
+  <string name="label_action_clear_notifications">Bersihkan pemberitahuan</string>
+  <string name="label_action_editing_smartbar">Penyunting smartbar</string>
+  <string name="label_action_split_screen">Belah Layar</string>
+  <string name="label_action_one_handed_mode_left">Modus satu tangan (sisi kiri)</string>
+  <string name="label_action_one_handed_mode_right">Modus satu tangan (sisi kanan)</string>
+  <string name="label_action_media_left">Trek sebelumnya</string>
+  <string name="label_action_media_right">Trek berikutnya</string>
+  <string name="label_action_assistant_sound_search">Pencarian suara Google</string>
   <!-- Smartbar -->
+  <string name="label_smartbar_actions">Tindakan</string>
+  <string name="label_smartbar_icon">Ikon</string>
+  <string name="label_smartbar_add">Tambah</string>
+  <string name="label_smartbar_remove">Hapus</string>
+  <string name="label_smartbar_cancel">Batal</string>
+  <string name="label_smartbar_finish">Selesai</string>
+  <string name="label_smartbar_single_tap">Tekan sekali</string>
+  <string name="label_smartbar_double_tap">Tekan dua kali</string>
+  <string name="label_smartbar_long_press">Tekan lama</string>
+  <string name="label_smartbar_icon_pack">Paket ikon</string>
+  <string name="label_smartbar_icon_gallery">Galeri</string>
+  <string name="label_smartbar_icon_color">Warna</string>
+  <string name="label_smartbar_icon_reset">Setel ulang</string>
+  <string name="smartbar_editor_toast_starting">Memulai penyunting navigasi</string>
+  <string name="smartbar_editor_toast_stopping">Menghentikan penyunting navigasi</string>
+  <string name="smartbar_editor_toast_unavailable">Penyunting navigasi tidak tersedia</string>
+  <string name="edit_mode">Modus sunting</string>
   <!-- App killed message -->
+  <string name="app_killed_message">%s dimatikan</string>
   <!-- Pulse and media arrows blacklist -->
 </resources>
